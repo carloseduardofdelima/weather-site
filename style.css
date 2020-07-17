@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h3 {
+    color: white;
+}
+
+#main {
+    margin-top: 10vh;
+}
+
+#main-card {
+    width: 25rem;
+    height: 70vh;
+}
+
+.card-group {
+    margin: 30px 0px;
+}
