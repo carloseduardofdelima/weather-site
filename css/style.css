@@ -17,6 +17,14 @@ h3 {
     height: 70vh;
 }
 
+.card-body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
 .card-group {
     margin: 30px 0px;
 }
