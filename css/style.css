@@ -9,11 +9,11 @@ nav h3 {
 }
 
 #main {
-    margin-top: 10vh;
+    margin-top: 5vh;
 }
 
 #main-card {
-    width: 25rem;
+    width: 20rem;
     height: 70vh;
 }
 
@@ -27,8 +27,8 @@ nav h3 {
 
 .card-group {
     margin: 30px 0px;
-}
 
+}
 
 .card-title, .card-text {
     text-align: center;
