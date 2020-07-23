@@ -6,7 +6,7 @@ async function getCityId (e) {
     let inputValue = document.querySelector('.form-control').value;
     let cityName = document.querySelector('.card-city-name');
 
-    await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&q=${inputValue}&language=pt-br`)
+    await axios.get(`https://dataservice.accuweather.com/locations/v1/cities/search?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&q=${inputValue}&language=pt-br`)
     .then(response => {
         setWeather(response.data[0].Key);
         cityName.innerHTML = `Clima em ${response.data[0].LocalizedName}`
@@ -16,17 +16,17 @@ async function getCityId (e) {
 
 async function setWeather(cityId) {
     
-    await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${cityId}/historical?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&details=true&language=pt-br`)
+    await axios.get(`https://dataservice.accuweather.com/currentconditions/v1/${cityId}/historical?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&details=true&language=pt-br`)
     .then(response => {
         setMainCardWeather(response.data[0]);
     })
         
-    await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityId}?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&details=true&language=pt-br`)
+    await axios.get(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityId}?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&details=true&language=pt-br`)
     .then(response => {
         setWeeklyForecast(response.data.DailyForecasts);
     })
 
-    await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${cityId}?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&details=true&language=pt-br`)
+    await axios.get(`https://dataservice.accuweather.com/forecasts/v1/daily/1day/${cityId}?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&details=true&language=pt-br`)
     .then(response => {
         setDailyForecast(response.data.DailyForecasts[0]);
     })
