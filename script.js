@@ -1,4 +1,38 @@
-function setMainCardWheater (data) {
+const button = document.querySelector('.btn').addEventListener('click', getCityId);
+const body = document.querySelector('body');
+
+async function getCityId (e) {
+    e.preventDefault();
+    let inputValue = document.querySelector('.form-control').value;
+    let cityName = document.querySelector('.card-city-name');
+
+    await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&q=${inputValue}&language=pt-br`)
+    .then(response => {
+        setWeather(response.data[0].Key);
+        cityName.innerHTML = `Clima em ${response.data[0].LocalizedName}`
+        
+    })
+}
+
+async function setWeather(cityId) {
+    
+    await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${cityId}/historical?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&details=true&language=pt-br`)
+    .then(response => {
+        setMainCardWeather(response.data[0]);
+    })
+        
+    await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityId}?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&details=true&language=pt-br`)
+    .then(response => {
+        setWeeklyForecast(response.data.DailyForecasts);
+    })
+
+    await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${cityId}?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&details=true&language=pt-br`)
+    .then(response => {
+        setDailyForecast(response.data.DailyForecasts[0]);
+    })
+};
+
+function setMainCardWeather (data) {
     let main_card_title = document.querySelector('#main-card .card-title');
     let main_card_icon = document.querySelector('#main-card .wheater-icon');
     let main_card_temperature = document.querySelector('#main-card .temperature');
@@ -11,26 +45,21 @@ function setMainCardWheater (data) {
         Umidade: ${data.IndoorRelativeHumidity}%<br>
         Vento: ${data.Wind.Speed.Metric.Value}km/h
         `;
-
 }
 
 function setWeeklyForecast (data) {
     let forecast_day = document.querySelectorAll('.forecast-day');
     let forecast_icon = document.querySelectorAll('.forecast-icon');
     let forecast_text = document.querySelectorAll('.forecast-text');
-    console.log(forecast_text);
     
     data.forEach((forecast, index) => {
         forecast_text[index].innerHTML = forecast.Day.ShortPhrase;
-        forecast_day[index].innerHTML = forecast.Date.slice(8, 10);
+        forecast_day[index].innerHTML = `Dia ${forecast.Date.slice(8, 10)}`;
         forecast_icon[index].src = `svg/${forecast.Day.Icon}.svg`;
     })
-
-
 }
 
 function setDailyForecast (data) {
-    console.log(data);
     let forecast_icon = document.querySelectorAll('.daily-forecast .wheater-icon');
     let forecast_text = document.querySelectorAll('.daily-forecast .card-text');
 
@@ -39,29 +68,8 @@ function setDailyForecast (data) {
 
     forecast_text[0].innerHTML = data.Day.IconPhrase;
     forecast_text[1].innerHTML = data.Night.IconPhrase;
-
     
 }
 
-async function setDefaultWheater() {
-    
-    await axios.get('http://dataservice.accuweather.com/currentconditions/v1/110258/historical?apikey=dxDbkA6EfN8f83TwD1pEMSHhjCY9jBZO&details=true&language=pt-br')
-    .then(response => {
-        setMainCardWheater(response.data[0]);
-    })
-        
-        
-    await axios.get('http://dataservice.accuweather.com/forecasts/v1/daily/5day/110258?apikey=dxDbkA6EfN8f83TwD1pEMSHhjCY9jBZO&details=true&language=pt-br')
-    .then(response => {
-        setWeeklyForecast(response.data.DailyForecasts);
-    })
-
-    await axios.get('http://dataservice.accuweather.com/forecasts/v1/daily/1day/110258?apikey=dxDbkA6EfN8f83TwD1pEMSHhjCY9jBZO&details=true&language=pt-br')
-    .then(response => {
-        setDailyForecast(response.data.DailyForecasts[0]);
-    })
-
-
-};
-
-setDefaultWheater();
+//Set a default Weather
+setWeather(110258);

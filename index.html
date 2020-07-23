@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-    <link rel="icon" href="src/cloud.png" type="image/x-icon">
+    <link rel="icon" href="img/cloud.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
-    <title>Wheater.io</title>
+    <title>Weather.io</title>
 </head>
 
 <body>
     <nav class="navbar bg-info">
         <div class="container-fluid d-flex justify-content-around">
             <h3 class="d-flex align-items-center">
-                <img width="50" height="50" src="src/cloud.png">
-                Wheater.io
+                <img width="50" height="50" src="img/cloud.png">
+                Weather.io
             </h3>
             <form class="d-flex">
                 <input class="form-control mr-2" type="search" placeholder="Buscar cidade" aria-label="Search">
@@ -27,9 +27,10 @@
 
     <div class="container-fluid" id="main">
         <div class="row d-flex justify-content-around">
-            <div class="card bg-light mb-3" id="main-card">
-                <div class="card-body">
-                    <h2 class="card-title">Light card title</h2>
+            <div class="card" id="main-card">
+                <div class="card-body text-center">
+                    <h2 class="card-city-name">Clima em Brasília</h2>
+                    <h3 class="card-title">Light card title</h3>
                     <img class="wheater-icon"></img>
                     <h2 class="temperature">Temperature</h2>
                     <p class="sub-info"></p>
@@ -94,7 +95,12 @@
             </div>
         </div>
     </div>
-
+    
+    <footer class="page-footer font-small">
+        <div class="footer-copyright text-center py-3">Made with love by
+            <a href="https://github.com/carloseduardofdelima">Carlos Eduardo</a>
+        </div>
+    </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
