@@ -1,7 +1,21 @@
 const button = document.querySelector('.btn').addEventListener('click', getCityId);
 const body = document.querySelector('body');
 
+
+function showLoading() {
+  document.querySelector("#main").style.display = "none";
+  document.querySelector("#loader").style.display = "block";
+  document.querySelector('footer').style.display = "none";
+}
+
+function closeLoading() {
+  document.querySelector("#main").style.display = "block";
+  document.querySelector("#loader").style.display = "none";
+  document.querySelector('footer').style.display = "block";
+}
+
 async function getCityId (e) {
+ 
     e.preventDefault();
     let inputValue = document.querySelector('.form-control').value;
     let cityName = document.querySelector('.card-city-name');
@@ -15,6 +29,7 @@ async function getCityId (e) {
 }
 
 async function setWeather(cityId) {
+    showLoading();
     
     await axios.get(`https://dataservice.accuweather.com/currentconditions/v1/${cityId}/historical?apikey=VurAd6YHhdeIfisHXFxOVrhFoX5hVU7I&details=true&language=pt-br`)
     .then(response => {
@@ -68,6 +83,8 @@ function setDailyForecast (data) {
 
     forecast_text[0].innerHTML = data.Day.IconPhrase;
     forecast_text[1].innerHTML = data.Night.IconPhrase;
+
+    closeLoading();
     
 }
 

@@ -2,11 +2,15 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: #424141;
+    background: #27302e;
 }
 
 nav h3, h2 {
     color: white;
+}
+
+.col-6 {
+    width: 60%;
 }
 
 #main {
@@ -56,7 +60,21 @@ nav h3, h2 {
     height: 100px;
 }
 
+#loader {
+    color: white;
+    text-align: center;
+    margin: 100px 0px;
+    font-size: 2rem;
+}
+
 footer {
     background: rgb(32, 25, 25);
     color: white;
+}
+
+@media(max-width: 800px) {
+    h2 {
+        text-align: center;
+    }
+
 }
